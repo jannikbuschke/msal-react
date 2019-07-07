@@ -19,6 +19,7 @@
   "main": "./lib/index.js",
   "types": "./lib/types.d.ts",
   "scripts": {
+    "build": "tsc --version && tsc",
     "tsc": "tsc --version && tsc",
     "watch": "tsc --watch",
     "cleanbuild": "rm -r node_modules && npm install && tsc"
