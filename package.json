@@ -1,0 +1,46 @@
+{
+  "name": "@jbuschke/react-msal",
+  "version": "0.1.0",
+  "author": "Jannik Buschke",
+  "description": "MSAL.js integration for react",
+  "displayName": "msal-react",
+  "keywords": [
+    "react",
+    "msal",
+    "authentication",
+    "aad"
+  ],
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/types.d.ts",
+  "scripts": {
+    "tsc": "tsc --version && tsc",
+    "watch": "tsc --watch",
+    "cleanbuild": "rm -r node_modules && npm install && tsc"
+  },
+  "peerDependencies": {
+    "msal": ">= 1 < 2",
+    "react": ">= 16.8.0 < 17",
+    "react-dom": ">= 16.8.0 < 17"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.11",
+    "@types/node": "11.13.4",
+    "@types/react": "16.8.11",
+    "@types/react-dom": "16.8.4",
+    "msal": "1.0.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "tslib": "1.9.3",
+    "typescript": "3.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jannikbuschke/msal-react/"
+  }
+}
