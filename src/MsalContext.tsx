@@ -42,6 +42,7 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
                 if (E.errorCode === "user_login_error") {
                     await login(request);
                 } else {
+                    console.error("errorcode:",E.errorCode)
                     throw E
                 }
                 const token = await app.acquireTokenSilent({
