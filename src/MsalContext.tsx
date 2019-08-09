@@ -35,11 +35,12 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
     }, [])
 
     async function login(request: MSAL.AuthenticationParameters) {
+        const loginParameter = { ...defaultLoginParameters, ...request }
         if (loginMethod === "popup") {
-            const response = await app.loginPopup({ ...defaultLoginParameters, ...request });
+            const response = await app.loginPopup(loginParameter);
             return response;
         } else if (loginMethod === "redirect") {
-            const response = await app.loginRedirect({ ...defaultLoginParameters, ...request });
+            const response = await app.loginRedirect(loginParameter);
             return response;
         }
     }
