@@ -60,11 +60,12 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
                 const token = await app.acquireTokenSilent($request);
                 return token;
             } catch (E) {
+                console.log(E)
                 if (E.errorCode === "user_login_error") {
                     await login(request);
                 }
                 else if(E.errorCode ==="token_renewal_error") {
-                    await login(request);
+                    // await login(request);
                 }
                 else {
                     console.error("errorcode:", E.errorCode)
