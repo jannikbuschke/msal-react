@@ -64,6 +64,14 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
                 if (E.errorCode === "user_login_error") {
                     await login(request);
                 }
+                else if(E.errorCode === "consent_required"){
+                    if (loginMethod === "popup") {
+                        const response = await app.acquireTokenPopup(request);
+                        return response;
+                    } else if (loginMethod === "redirect") {
+                        app.acquireTokenRedirect(request)
+                    }
+                }
                 else if(E.errorCode ==="token_renewal_error") {
                     // await login(request);
                 }
