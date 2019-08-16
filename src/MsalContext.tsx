@@ -7,6 +7,7 @@ interface MsalContext {
     acquireToken: (request: MSAL.AuthenticationParameters) => Promise<MSAL.AuthResponse>;
     config: MSAL.Configuration;
     isLoggedIn: () => Promise<boolean>;
+    app: MSAL.UserAgentApplication
 }
 
 type LoginMethod = "redirect" | "popup"
@@ -46,6 +47,7 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
     }
 
     return <MsalContext.Provider value={{
+        app,
         config,
         login: login,
         logout: () => {
