@@ -26,9 +26,11 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
     const app = React.useMemo(() => {
         const agent = new MSAL.UserAgentApplication(config)
         function authCallback(error:any, response:any) {
-            console.error("msal redirect error")
-            console.error(error)
-            console.error(response)
+            if(error){
+                console.error("msal redirect error")
+                console.error(error)
+                console.error(response)
+            }
         }
         // (optional when using redirect methods) register redirect call back for Success or Error
         agent.handleRedirectCallback(authCallback);
