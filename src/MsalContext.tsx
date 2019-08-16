@@ -6,7 +6,7 @@ interface MsalContext {
     logout: () => void;
     acquireToken: (request: MSAL.AuthenticationParameters) => Promise<MSAL.AuthResponse>;
     config: MSAL.Configuration;
-    isLoggedIn: () => Promise<boolean>;
+    isLoggedIn: (scopes?: string[]) => Promise<boolean>;
     app: MSAL.UserAgentApplication
 }
 
