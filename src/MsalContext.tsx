@@ -90,7 +90,7 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
         },
         isLoggedIn: async (scopes?: string[]) => {
             try {
-                await app.acquireTokenSilent({ scopes: scopes? scopes: ["User.Read"] });
+                await app.acquireTokenSilent({ authority: app.authority, scopes: scopes? scopes: ["User.Read"] });
                 return true
             } catch (E) {
                 console.log("checking for login error",E)
