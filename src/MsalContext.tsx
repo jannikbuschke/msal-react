@@ -48,7 +48,7 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
         }
     }
 
-    return <MsalContext.Provider value={{
+    const value = React.useMemo<MsalContext>(()=>({
         app,
         config,
         login: login,
@@ -99,5 +99,7 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
                 return false
             }
         }
-    }}> {children}</MsalContext.Provider >
+    }),[])
+
+    return <MsalContext.Provider value={value}> {children}</MsalContext.Provider >
 }
