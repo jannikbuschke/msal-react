@@ -117,8 +117,11 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
                 await app.acquireTokenSilent({ authority: app.authority, scopes: scopes? scopes: ["User.Read"] });
                 return true
             } catch (E) {
-                console.log("checking for login error",E)
-                return false
+                if(E.errorCode === "user_login_error")
+                {
+                    return false
+                }
+                return true
             }
         }
     }),[])
