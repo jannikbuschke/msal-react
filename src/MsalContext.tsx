@@ -7,7 +7,9 @@ interface MsalContext {
     acquireToken: (request: MSAL.AuthenticationParameters) => Promise<MSAL.AuthResponse>;
     config: MSAL.Configuration;
     isLoggedIn: (scopes?: string[]) => Promise<boolean>;
-    app: MSAL.UserAgentApplication
+    app: MSAL.UserAgentApplication,
+    hasGivenConsent: (scopes:string[]) =>Promise<boolean>;
+    giveConsent:(scopes:string[])=>Promise<void>;
 }
 
 type LoginMethod = "redirect" | "popup"
@@ -54,6 +56,26 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
         login: login,
         logout: () => {
             app.logout()
+        },
+        giveConsent: async (scopes)=>{
+            if(loginMethod==="redirect") {
+               app.acquireTokenRedirect({ scopes, prompt: "consent" })
+            }else{
+                await app.acquireTokenPopup({ scopes, prompt: "consent" })
+            }
+        },
+        hasGivenConsent: async (scopes)=>{
+            try {
+                await app.acquireTokenSilent({scopes});
+                return true
+            } catch (E) {
+                if(E.errorCode === "consent_required") {
+                    return false
+                } else {
+                    console.error("error while checking for consent", E.errorCode)
+                    throw E
+                }
+            }
         },
         acquireToken: async (request) => {
             try {
