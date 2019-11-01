@@ -126,5 +126,5 @@ export function MsalProvider({ config, children, loginMethod, defaultLoginParame
         }
     }),[])
 
-    return <MsalContext.Provider value={value}> {children}</MsalContext.Provider >
+    return <MsalContext.Provider value={value}>{children}</MsalContext.Provider>
 }
